@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Caja Misteriosa del Amor</title>
+    <link rel="stylesheet" href="style.css?v=3.3"> 
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-gradient"></div>
+    <div class="heart-particles-overlay"></div> 
+    
+    <div class="scene">
+        <div id="gift-box-wrapper" class="gift-box-wrapper clickable"> 
+            
+            <div id="gift-box" class="gift-box">
+                
+                <div class="box-face front"></div>
+                <div class="box-face back"></div>
+                <div class="box-face left"></div>
+                <div class="box-face right"></div>
+                <div id="box-top" class="box-face top"></div> 
+                <div class="box-face bottom"></div>
+            </div>
+            
+        </div>
+        
+        <div id="photo-row" class="photo-row">
+        </div>
+
+        <div id="individual-message" class="individual-message">
+            <p id="short-message-text"></p>
+        </div>
+
+        <div id="final-message" class="final-message">
+            <p id="long-message-text"></p>
+        </div>
+    </div>
+
+    <button id="music-toggle-button" class="music-toggle-button hidden-btn">
+        ▶️ Activar Música
+    </button>
+    
+    <audio id="background-music" loop autoplay>
+        <source src="musica-magica.mp3" type="audio/mp3">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+    
+    <script src="script.js?v=3.3"></script>
+</body>
+</html>
