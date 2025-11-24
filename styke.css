@@ -1,0 +1,214 @@
+/* Importar fuentes de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@300;400;700&display=swap');
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: #0d001a; 
+    color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden; 
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* Fondo degradado suave */
+.background-gradient {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(30, 0, 40, 0.8) 0%, rgba(15, 0, 25, 1) 100%);
+    z-index: -2; 
+}
+
+/* --- PARTÍCULAS DE CORAZONES NEÓN (Reglas de CSS omitidas por espacio, asumir que están bien) --- */
+.heart-particles-overlay { /* ... */ }
+.heart-particle { /* ... */ }
+@keyframes heart-flow { /* ... */ }
+
+/* --- BOTÓN DE MÚSICA DE RESPALDO --- */
+.music-toggle-button {
+    position: fixed; 
+    bottom: 10px;
+    right: 10px;
+    z-index: 100;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff4081; /* Rosa brillante */
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    outline: none;
+}
+
+.music-toggle-button.hidden-btn {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.music-toggle-button.show-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+/* --- SCENE Y CAJA 3D (Magenta Sólido) --- */
+.scene {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+.gift-box-wrapper {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    transform-style: preserve-3d; 
+    transition: transform 1s ease-in-out, opacity 0.5s; 
+    cursor: pointer; 
+    z-index: 20; 
+    animation: shake 0.5s infinite alternate; /* Vibración */
+}
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    100% { transform: translate(-1px, -1px) rotate(-0.5deg); }
+}
+
+.gift-box {
+    width: 100%; 
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.box-face {
+    position: absolute;
+    width: 250px; 
+    height: 250px;
+    background: #e91e63; /* Magenta Sólido */
+    border: 5px solid #ff4081; 
+    box-shadow: 0 0 25px rgba(255, 64, 129, 0.8); 
+    transition: transform 1s ease-in-out; 
+    backface-visibility: hidden; 
+}
+
+/* Posicionamiento 3D (para que sea un cubo de 250px) */
+.box-face.front  { transform: rotateY(0deg) translateZ(125px); }
+.box-face.back   { transform: rotateY(180deg) translateZ(125px); }
+.box-face.right  { transform: rotateY(90deg) translateZ(125px); }
+.box-face.left   { transform: rotateY(-90deg) translateZ(125px); }
+.box-face.top    { transform: rotateX(90deg) translateZ(125px); }
+.box-face.bottom { transform: rotateX(-90deg) translateZ(125px); }
+
+/* --- ANIMACIÓN DE APERTURA --- */
+.gift-box-wrapper.opened {
+    animation: none; 
+    cursor: default;
+}
+
+.gift-box-wrapper.opened #box-top {
+    transform: rotateX(90deg) translateZ(125px) translateY(-200px) rotateX(45deg); 
+    opacity: 0;
+}
+
+/* --- FILA DE FOTOS (Centralizada y Arriba) --- */
+.photo-row {
+    position: absolute;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    top: 40%; /* Posición más arriba */
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    z-index: 10;
+}
+
+.photo-item {
+    width: 150px;
+    height: 150px;
+    margin: 0 10px; 
+    position: absolute; 
+    opacity: 0;
+    transition: all 1s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+    box-shadow: 0 0 20px rgba(255, 64, 129, 0.8);
+    border: 3px solid #ff80ab;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+/* --- MENSAJES DE AMOR --- */
+
+/* Mensaje Individual (el que aparece con cada foto) */
+.individual-message {
+    position: absolute;
+    top: 58%; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    text-align: center;
+    width: 90%;
+    max-width: 500px;
+    z-index: 30;
+    opacity: 0;
+    transition: opacity 0.5s, transform 0.5s;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid #ff4081;
+}
+
+#short-message-text {
+    font-family: 'Quicksand', sans-serif; 
+    font-size: 1.2em;
+    color: #ff80ab;
+}
+
+/* Mensaje Final (el que aparece al final de todo) */
+.final-message {
+    position: absolute;
+    bottom: 5%; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 550px;
+    z-index: 60; 
+    opacity: 0;
+    transition: opacity 1.5s ease-in; 
+    background: rgba(0, 0, 0, 0.85); 
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #ff80ab;
+    text-align: center;
+}
+
+#long-message-text {
+    font-family: 'Quicksand', sans-serif; /* Fuente sin cursiva */
+    font-size: 1.5em;
+    color: #ff4081;
+    line-height: 1.4;
+}
+
+/* Reglas del Typewriter */
+@keyframes typing { /* ... */ }
+@keyframes blink-caret { /* ... */ }
+.typewriter-animation { /* ... */ }
+
+/* Media Queries (Ajuste para móviles) */
+@media (max-width: 850px) { /* ... */ }
